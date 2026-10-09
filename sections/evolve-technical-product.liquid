@@ -1,3 +1,13 @@
+{%- liquid
+  assign body_font = section.settings.typography_font | font_modify: 'weight', '400'
+  assign subheading_font = body_font | font_modify: 'weight', '600'
+  assign heading_font = body_font | font_modify: 'weight', '700'
+-%}
+{% style %}
+  {{ body_font | font_face: font_display: 'swap' }}
+  {{ subheading_font | font_face: font_display: 'swap' }}
+  {{ heading_font | font_face: font_display: 'swap' }}
+{% endstyle %}
 {{ 'evolve-technical-product.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'evolve-technical-product.js' | asset_url }}" defer="defer"></script>
 {%- liquid
@@ -5,7 +15,7 @@
   assign main_image = section.settings.image | default: product.featured_image
   assign main_title = section.settings.heading | default: product.title
 -%}
-<div id="Evolve-{{ section.id }}" class="ev-tech" data-evolve-product style="--ev-bg:{{ section.settings.background }};--ev-panel:{{ section.settings.panel }};--ev-text:{{ section.settings.text_color }};--ev-muted:{{ section.settings.muted }};--ev-accent:{{ section.settings.accent }};--ev-line:{{ section.settings.line }};--ev-button:{{ section.settings.button_bg }};--ev-button-text:{{ section.settings.button_text }};--ev-font:{{ section.settings.font }};--ev-title:{{ section.settings.title_size }}px;--ev-title-mobile:{{ section.settings.mobile_title_size }}px;--ev-body:{{ section.settings.body_size }}px;--ev-label:{{ section.settings.label_size }}px;--ev-width:{{ section.settings.max_width }}px;--ev-padding:{{ section.settings.padding }}px;--ev-gap:{{ section.settings.gap }}px;--ev-radius:{{ section.settings.radius }}px;--ev-row:{{ section.settings.row_padding }}px;">
+<div id="Evolve-{{ section.id }}" class="ev-tech" data-evolve-product style="--ev-bg:{{ section.settings.background }};--ev-panel:{{ section.settings.panel }};--ev-text:{{ section.settings.text_color }};--ev-muted:{{ section.settings.muted }};--ev-accent:{{ section.settings.accent }};--ev-line:{{ section.settings.line }};--ev-button:{{ section.settings.button_bg }};--ev-button-text:{{ section.settings.button_text }};--ev-font:{{ body_font.family | escape }}, {{ body_font.fallback_families | escape }};--ev-title:{{ section.settings.title_size }}px;--ev-title-mobile:{{ section.settings.mobile_title_size }}px;--ev-body:{{ section.settings.body_size }}px;--ev-label:{{ section.settings.label_size }}px;--ev-width:{{ section.settings.max_width }}px;--ev-padding:{{ section.settings.padding }}px;--ev-gap:{{ section.settings.gap }}px;--ev-radius:{{ section.settings.radius }}px;--ev-row:{{ section.settings.row_padding }}px;">
   <div class="ev-tech__layout">
     <div class="ev-tech__media{% if section.settings.show_grid %} ev-tech__media--grid{% endif %}">
       <div class="ev-tech__media-top"><span>{{ section.settings.eyebrow | escape }}</span><span class="ev-tech__marker" aria-hidden="true">＋</span></div>
@@ -38,8 +48,7 @@
       {% if section.settings.show_title %}<h2 class="ev-tech__title">{{ main_title | escape }}</h2>{% endif %}
       {% if section.settings.show_description %}<div class="ev-tech__description">{% if section.settings.intro != blank %}{{ section.settings.intro }}{% else %}{{ product.description }}{% endif %}</div>{% endif %}
       {% if section.settings.show_specs %}
-        <div class="ev-tech__spec-header"><h3>{{ section.settings.spec_heading | escape }}</h3><span aria-hidden="true">↗</span></div>
-        <dl class="ev-tech__specs">
+        {% capture spec_rows %}
           {% for block in section.blocks %}
             {% if block.type == 'spec' and block.settings.enabled %}
               {%- liquid
@@ -59,10 +68,15 @@
               {% endunless %}
             {% endif %}
           {% endfor %}
-        </dl>
+        {% endcapture %}
+        {% assign visible_rows = spec_rows | strip %}
+        {% if visible_rows != blank %}
+          <div class="ev-tech__spec-header"><h3>{{ section.settings.spec_heading | escape }}</h3><span aria-hidden="true">↗</span></div>
+          <dl class="ev-tech__specs">{{ spec_rows }}</dl>
+        {% endif %}
       {% endif %}
       {% if section.settings.show_download and section.settings.datasheet_url != blank %}
-        <a class="ev-tech__download" href="{{ section.settings.datasheet_url | escape }}">{{ section.settings.datasheet_label | escape }} <span aria-hidden="true">↗</span></a>
+        <a class="ev-tech__download{% if section.settings.datasheet_style == 'button' %} ev-tech__download--button{% endif %}" href="{{ section.settings.datasheet_url | escape }}">{{ section.settings.datasheet_label | escape }} <span aria-hidden="true">↗</span></a>
       {% endif %}
       {% if section.settings.show_purchase %}
         {% assign form_id = 'EvolveForm-' | append: section.id %}
@@ -184,6 +198,22 @@
       "default": "Safety Data Sheet"
     },
     {
+      "type": "select",
+      "id": "datasheet_style",
+      "label": "Safety data sheet appearance",
+      "default": "link",
+      "options": [
+        {
+          "value": "link",
+          "label": "Underlined link"
+        },
+        {
+          "value": "button",
+          "label": "Button"
+        }
+      ]
+    },
+    {
       "type": "text",
       "id": "image_caption",
       "label": "Image caption",
@@ -252,24 +282,10 @@
       "content": "Typography and layout"
     },
     {
-      "type": "select",
-      "id": "font",
-      "label": "Font family",
-      "options": [
-        {
-          "value": "inherit",
-          "label": "Impulse theme font"
-        },
-        {
-          "value": "sans-serif",
-          "label": "System sans serif"
-        },
-        {
-          "value": "monospace",
-          "label": "Technical monospace"
-        }
-      ],
-      "default": "inherit"
+      "type": "font_picker",
+      "id": "typography_font",
+      "label": "Section font",
+      "default": "montserrat_n4"
     },
     {
       "type": "range",
@@ -396,7 +412,8 @@
           "label": "Hide when no value",
           "default": true
         }
-      ]
+      ],
+      "limit": 8
     },
     {
       "type": "hotspot",
@@ -440,7 +457,8 @@
           "default": 40,
           "unit": "%"
         }
-      ]
+      ],
+      "limit": 12
     }
   ],
   "max_blocks": 20,
