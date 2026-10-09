@@ -3,6 +3,8 @@
 Passed locally:
 - Shopify Theme Check 3.30.1: zero offenses for the section, checked in a temporary partial-theme harness with an empty locales directory.
 - JavaScript syntax check.
+- Vertical thumbnail rail is left of the main image on desktop/mobile without page overflow. Catalogue dropdown switches all six pack images and thumbnail clicks update its selection.
+- Variant selector switches to its matching pack image; pack thumbnail selects the matching variant; an unmapped pack disables purchase. Matching ignores whitespace in size values.
 - Hotspot plus uses two centred CSS strokes; browser geometry confirms the icon is centred within 0.1px on desktop/mobile, both closed and rotated open.
 - Browser checks: pack thumbnails have no visible labels and retain accessible names; table/link bottom spacing defaults to 32px and responds to adjustment; grid line and panel background colours update independently.
 - Six configured pack images render and switch individually; each selection updates the main image and pressed state. Disabled slots hide, all disabled slots stay hidden, and ordinary product-image fallback is capped at six.

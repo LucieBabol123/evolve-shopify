@@ -32,6 +32,7 @@
   <div class="ev-tech__layout">
     <div class="ev-tech__media{% if section.settings.show_grid %} ev-tech__media--grid{% endif %}">
       <div class="ev-tech__media-top"><span>{{ section.settings.eyebrow | escape }}</span><span class="ev-tech__marker" aria-hidden="true">＋</span></div>
+      <div class="ev-tech__gallery{% if section.settings.show_gallery %} ev-tech__gallery--rail{% endif %}">
       <div class="ev-tech__image-area">
         {% if main_image %}
           {{ main_image | image_url: width: 1600 | image_tag: class: 'ev-tech__image', widths: '400, 600, 800, 1200, 1600', sizes: '(min-width: 900px) 50vw, 100vw', loading: 'lazy' }}
@@ -47,13 +48,12 @@
           {% endfor %}
         {% endif %}
       </div>
-      {% if section.settings.show_gallery %}
-        <div class="ev-tech__thumbs" aria-label="Product images">
+        <div class="ev-tech__thumbs" aria-label="Product images"{% unless section.settings.show_gallery %} hidden{% endunless %}>
           {% if configured_size_count > 0 %}
             {% for block in section.blocks %}
               {% if block.type == 'size_image' and block.settings.enabled and block.settings.image != blank %}
                 {% assign image = block.settings.image %}
-                <button type="button" class="ev-tech__thumb ev-tech__thumb--size" data-image="{{ image | image_url: width: 1600 }}" data-srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1600 }} 1600w" data-alt="{{ image.alt | default: block.settings.label | escape }}" aria-label="Show {{ block.settings.label | escape }} pack image" aria-pressed="{% if image == main_image %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}</button>
+                <button type="button" class="ev-tech__thumb ev-tech__thumb--size" data-image="{{ image | image_url: width: 1600 }}" data-srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1600 }} 1600w" data-size="{{ block.settings.label | escape }}" data-alt="{{ image.alt | default: block.settings.label | escape }}" aria-label="Show {{ block.settings.label | escape }} pack image" aria-pressed="{% if image == main_image %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}</button>
               {% endif %}
             {% endfor %}
           {% else %}
@@ -62,13 +62,27 @@
             {% endfor %}
           {% endif %}
         </div>
-      {% endif %}
+      </div>
       {% if section.settings.image_caption != blank %}<div class="ev-tech__caption"><span class="ev-tech__dot" aria-hidden="true"></span>{{ section.settings.image_caption | escape }}<span aria-hidden="true">↗</span></div>{% endif %}
     </div>
     <div class="ev-tech__content">
       {% if section.settings.eyebrow != blank %}<div class="ev-tech__eyebrow">{{ section.settings.eyebrow | escape }}</div>{% endif %}
       {% if section.settings.show_title %}<h2 class="ev-tech__title">{{ main_title | escape }}</h2>{% endif %}
       {% if section.settings.show_description %}<div class="ev-tech__description">{% if section.settings.intro != blank %}{{ section.settings.intro }}{% else %}{{ product.description }}{% endif %}</div>{% endif %}
+      {% if configured_size_count > 0 %}
+        {% unless section.settings.show_purchase or section.settings.show_price or section.settings.show_cart %}
+          <div class="ev-tech__pack-picker">
+            <label for="EvolvePack-{{ section.id }}">Select pack size</label>
+            <select id="EvolvePack-{{ section.id }}" data-ev-pack>
+              {% for block in section.blocks %}
+                {% if block.type == 'size_image' and block.settings.enabled and block.settings.image != blank %}
+                  <option value="{{ block.id }}" data-image="{{ block.settings.image | image_url: width: 1600 }}"{% if block.settings.image == main_image %} selected{% endif %}>{{ block.settings.label | escape }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+        {% endunless %}
+      {% endif %}
       {% if section.settings.show_specs %}
         {% capture spec_rows %}
           {% for block in section.blocks %}
@@ -102,10 +116,10 @@
       {% endif %}
       {% if section.settings.show_purchase or section.settings.show_price or section.settings.show_cart %}
         {% capture commerce_controls %}
-          {% if section.settings.show_purchase or section.settings.show_cart %}
+          {% if section.settings.show_purchase or section.settings.show_cart or configured_size_count > 0 %}
             <label for="EvolveVariant-{{ section.id }}">Select option</label>
             <select id="EvolveVariant-{{ section.id }}" name="id" data-ev-variant>
-              {% for variant in product.variants %}<option value="{{ variant.id }}" data-price="{{ variant.price | money | escape }}" data-available="{{ variant.available }}"{% if variant == current_variant %} selected{% endif %}>{{ variant.title | escape }}{% unless variant.available %} — Sold out{% endunless %}</option>{% endfor %}
+              {% for variant in product.variants %}<option value="{{ variant.id }}" data-options="{{ variant.options | json | escape }}" data-image="{% if variant.featured_image %}{{ variant.featured_image | image_url: width: 1600 }}{% endif %}" data-price="{{ variant.price | money | escape }}" data-available="{{ variant.available }}"{% if variant == current_variant %} selected{% endif %}>{{ variant.title | escape }}{% unless variant.available %} — Sold out{% endunless %}</option>{% endfor %}
             </select>
           {% endif %}
           {% if section.settings.show_price %}<p class="ev-tech__price" data-ev-price aria-live="polite">{{ current_variant.price | money }}</p>{% endif %}
