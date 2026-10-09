@@ -22,7 +22,7 @@ Add, reorder, disable or remove up to **eight** specification rows independently
 
 ## Editor controls
 
-- Main image override, product title override, rich-text description override, technical label and image caption.
+- Main image override, product title override, rich-text description override, technical label and image caption. The image footer has a vector molecule mark at the bottom left, inspired by the supplied artwork, using the Accent colour setting.
 - Product title, description, thumbnails, hotspots, specification table and background grid visibility; separate variant selector, price and Add to cart toggles.
 - Section, image-panel background, grid lines, text, secondary text, accent, border, button background and button text colours. Grid line colour is independent of border/divider colour.
 - Montserrat font loaded through Shopify’s font library (Regular 400 body, Semibold 600 subheadings and labels, Bold 700 headings); desktop/mobile title sizes; body/label sizes; width, spacing, panel radius and row padding, plus a Space below table and data sheet slider (32px by default, applied below each).
