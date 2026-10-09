@@ -2,3 +2,5 @@
 .ev-tech__download{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;padding:14px 0;color:var(--ev-text);font-size:var(--ev-body);text-decoration:underline;text-underline-offset:4px;border-bottom:1px solid var(--ev-line)}.ev-tech__download:focus-visible{outline:2px solid var(--ev-text);outline-offset:4px}
 
 .ev-tech__tooltip strong{font-weight:600}.ev-tech__download{font-weight:600}.ev-tech__download--button{justify-content:center;background:var(--ev-button);color:var(--ev-button-text);border:0;border-radius:calc(var(--ev-radius)/2);text-decoration:none;padding:16px}.ev-tech__buy{font-weight:600}
+
+.ev-tech__thumb--size{width:68px;height:auto;min-height:86px;flex-basis:68px;padding:6px;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--ev-text);font:600 var(--ev-label)/1.4 var(--ev-font)}.ev-tech__thumb--size img{height:50px;width:50px;object-fit:contain}.ev-tech__thumb--size span{display:block;white-space:nowrap}

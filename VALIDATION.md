@@ -3,6 +3,8 @@
 Passed locally:
 - Shopify Theme Check 3.30.1: zero offenses for the section, checked in a temporary partial-theme harness with an empty locales directory.
 - JavaScript syntax check.
+- Six configured pack images render and switch individually; each selection updates the main image and pressed state. Disabled slots hide, all disabled slots stay hidden, and ordinary product-image fallback is capped at six.
+- Catalogue fixture has no price, variant selector, Add to cart or purchase form. Independent price-only, selector-only and cart-without-price fixtures render correctly. Selector changes without a cart button raise no browser error.
 - Schema enforces eight specification blocks; Liquid fixtures show eight populated rows or two populated rows with remaining values empty, and no table heading when no rows render.
 - Safety Data Sheet fixtures: underlined link, button style, and hidden link for an empty URL.
 - Browser computed typography: Montserrat 400 for body, 600 for row labels and 700 for title; all three preview font weights loaded successfully.

@@ -29,8 +29,10 @@
         const button = root.querySelector('[data-ev-buy]');
         const price = root.querySelector('[data-ev-price]');
         if (price) price.textContent = option.dataset.price;
-        button.disabled = option.dataset.available !== 'true';
-        button.textContent = button.disabled ? 'Sold out' : button.dataset.label;
+        if (button) {
+          button.disabled = option.dataset.available !== 'true';
+          button.textContent = button.disabled ? 'Sold out' : button.dataset.label;
+        }
       });
       root.querySelectorAll('.ev-tech__hotspot').forEach((hotspot) => {
         hotspot.addEventListener('toggle', () => {

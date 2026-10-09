@@ -8,7 +8,7 @@ A standalone Online Store 2.0 product section. Designed for a more technical Evo
 2. Open **Edit code** on the duplicate. Add `sections/evolve-technical-product.liquid` and the two `assets/evolve-technical-product.css` and `assets/evolve-technical-product.js` files, copying their contents from this package.
 3. Customize that theme, open a **product template**, and add **Evolve technical product**. This section appears on product templates only. Save and preview a real product.
 4. Keep Impulse's existing product section for its purchase controls by default. This new section is an additional overview; move it to suit your page. If using it as the main product display, avoid duplicated titles/descriptions through the visibility settings. Hiding/replacing Impulse's main section can also remove its reviews, apps, subscriptions, pickup and other features, so validate those requirements first.
-5. Only enable this section's purchase controls for straightforward products with standard variants. They use Shopify's native cart form and normal page navigation; they do not implement Impulse's cart drawer, subscriptions, personalization, quantity rules or app integrations. Keep Impulse's purchase form for those features.
+5. Only enable this section's **Show Add to cart** setting for straightforward products with standard variants. They use Shopify's native cart form and normal page navigation; they do not implement Impulse's cart drawer, subscriptions, personalization, quantity rules or app integrations. Keep Impulse's purchase form for those features.
 
 The precise Impulse version and its source were not supplied. This package uses scoped styles and Shopify section APIs; final integration must be checked in your duplicate theme. No store or live theme has been changed.
 
@@ -23,7 +23,7 @@ Add, reorder, disable or remove up to **eight** specification rows independently
 ## Editor controls
 
 - Main image override, product title override, rich-text description override, technical label and image caption.
-- Product title, description, thumbnails, hotspots, specification table, background grid, purchase controls and price visibility.
+- Product title, description, thumbnails, hotspots, specification table and background grid visibility; separate variant selector, price and Add to cart toggles.
 - Section, panel, text, secondary text, accent, border, button background and button text colours.
 - Montserrat font loaded through Shopify’s font library (Regular 400 body, Semibold 600 subheadings and labels, Bold 700 headings); desktop/mobile title sizes; body/label sizes; width, spacing, panel radius and row padding.
 - Hotspot title, detail text, visibility and horizontal/vertical placement. Detail text can connect to compatible dynamic sources.
@@ -46,6 +46,18 @@ Version target: Impulse 9.2.0 by Archetype Themes. Its theme source is not prese
 
 ## Update an existing installation
 
-Replace the section Liquid and CSS files with these latest versions; the JavaScript file is unchanged. Existing row connections and colour/size settings keep their setting IDs. The new Section font setting defaults to Montserrat. Keep **Hide when no value** enabled on each row for CSV-driven visibility. Connect the Safety Data Sheet URL once in the section settings, then choose its appearance. If an earlier installation has more than eight specification blocks, remove extra rows before saving under the new limit. Recheck in your duplicate theme before publishing.
+Replace the section Liquid and CSS files with these latest versions; also replace the JavaScript file to support independent catalogue controls. Existing row connections and colour/size settings keep their setting IDs. The new Section font setting defaults to Montserrat. Keep **Hide when no value** enabled on each row for CSV-driven visibility. Connect the Safety Data Sheet URL once in the section settings, then choose its appearance. If an earlier installation has more than eight specification blocks, remove extra rows before saving under the new limit. Recheck in your duplicate theme before publishing.
 
 The standalone preview embeds Montserrat font files distributed under the SIL Open Font License, included in `MONTSERRAT-LICENSE.txt`. The Shopify section itself loads its fonts through Shopify.
+
+## Six pack-size images and catalogue mode
+
+Add up to six **Pack size image** blocks. New sections come with labels **1L, 4L, 5L, 20L, 60L and 199L**. Choose an image for each and toggle **Show pack size** independently. On an existing section, add the six blocks manually. Labels are editable. Image-picker settings can connect to compatible product image/file dynamic sources, allowing different images on products sharing a template; manually selected images are shared by that template.
+
+Only enabled slots with an image appear. The first enabled image becomes the main image unless you set the main-image override. When any pack images have been configured, disabled slots do not fall back into the gallery. Without configured pack images, the section shows up to the first six existing product images. The thumbnails scroll horizontally on mobile. Hotspots belong to the primary image and hide when other images are selected.
+
+Pack thumbnails select display images only. When purchasing is enabled, customers choose their purchase variant with the separate variant selector; selecting a pack thumbnail does not select a purchase variant.
+
+**Show price**, **Show Add to cart** and **Show variant selector** are independent settings, all off by default on new sections. For a catalogue, leave price and Add to cart off; the image selector, specification table and Safety Data Sheet remain available. No purchase form is rendered when Add to cart is off. Turning Add to cart on also supplies the variant selector required to choose a valid purchase variant. You can keep price hidden while enabling cart, or show price with cart disabled.
+
+These toggles affect this custom section only. To keep the whole product page in catalogue mode, hide price and purchase controls in Impulse's other product sections as well. Theme visibility settings do not disable the store's checkout or other sales channels.
