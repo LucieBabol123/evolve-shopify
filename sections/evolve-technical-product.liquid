@@ -40,7 +40,7 @@
           {% for block in section.blocks %}
             {% if block.type == 'hotspot' and block.settings.enabled %}
               <details class="ev-tech__hotspot{% if block.settings.x > 50 %} ev-tech__hotspot--right{% endif %}{% if block.settings.y > 55 %} ev-tech__hotspot--bottom{% endif %}" style="left:{{ block.settings.x }}%;top:{{ block.settings.y }}%;" {{ block.shopify_attributes }}>
-                <summary aria-label="{{ block.settings.title | escape }}"><span aria-hidden="true">+</span></summary>
+                <summary aria-label="{{ block.settings.title | escape }}"><span aria-hidden="true"></span></summary>
                 <div class="ev-tech__tooltip"><strong>{{ block.settings.title | escape }}</strong><p>{{ block.settings.body | escape | newline_to_br }}</p></div>
               </details>
             {% endif %}
