@@ -24,8 +24,8 @@ Add, reorder, disable or remove up to **eight** specification rows independently
 
 - Main image override, product title override, rich-text description override, technical label and image caption.
 - Product title, description, thumbnails, hotspots, specification table and background grid visibility; separate variant selector, price and Add to cart toggles.
-- Section, panel, text, secondary text, accent, border, button background and button text colours.
-- Montserrat font loaded through Shopify’s font library (Regular 400 body, Semibold 600 subheadings and labels, Bold 700 headings); desktop/mobile title sizes; body/label sizes; width, spacing, panel radius and row padding.
+- Section, image-panel background, grid lines, text, secondary text, accent, border, button background and button text colours. Grid line colour is independent of border/divider colour.
+- Montserrat font loaded through Shopify’s font library (Regular 400 body, Semibold 600 subheadings and labels, Bold 700 headings); desktop/mobile title sizes; body/label sizes; width, spacing, panel radius and row padding, plus a Space below table and data sheet slider (32px by default, applied below each).
 - Hotspot title, detail text, visibility and horizontal/vertical placement. Detail text can connect to compatible dynamic sources.
 
 Hotspot coordinates relate to the primary image. They disappear when another gallery image is selected and return with the primary image. Use an image override if you need stable placement across products. The same template shares hotspot positions across products; use separate product templates where images differ substantially. Video and 3D media remain in Impulse's main gallery.
@@ -52,7 +52,7 @@ The standalone preview embeds Montserrat font files distributed under the SIL Op
 
 ## Six pack-size images and catalogue mode
 
-Add up to six **Pack size image** blocks. New sections come with labels **1L, 4L, 5L, 20L, 60L and 199L**. Choose an image for each and toggle **Show pack size** independently. On an existing section, add the six blocks manually. Labels are editable. Image-picker settings can connect to compatible product image/file dynamic sources, allowing different images on products sharing a template; manually selected images are shared by that template.
+Add up to six **Pack size image** blocks. New sections come with labels **1L, 4L, 5L, 20L, 60L and 199L**. Choose an image for each and toggle **Show pack size** independently. On an existing section, add the six blocks manually. Labels are editable for the theme editor and accessibility; no pack-size text is shown below the thumbnail. Image-picker settings can connect to compatible product image/file dynamic sources, allowing different images on products sharing a template; manually selected images are shared by that template.
 
 Only enabled slots with an image appear. The first enabled image becomes the main image unless you set the main-image override. When any pack images have been configured, disabled slots do not fall back into the gallery. Without configured pack images, the section shows up to the first six existing product images. The thumbnails scroll horizontally on mobile. Hotspots belong to the primary image and hide when other images are selected.
 

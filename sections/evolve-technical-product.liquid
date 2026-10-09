@@ -28,7 +28,7 @@
   endif
   assign main_title = section.settings.heading | default: product.title
 -%}
-<div id="Evolve-{{ section.id }}" class="ev-tech" data-evolve-product style="--ev-bg:{{ section.settings.background }};--ev-panel:{{ section.settings.panel }};--ev-text:{{ section.settings.text_color }};--ev-muted:{{ section.settings.muted }};--ev-accent:{{ section.settings.accent }};--ev-line:{{ section.settings.line }};--ev-button:{{ section.settings.button_bg }};--ev-button-text:{{ section.settings.button_text }};--ev-font:{{ body_font.family | escape }}, {{ body_font.fallback_families | escape }};--ev-title:{{ section.settings.title_size }}px;--ev-title-mobile:{{ section.settings.mobile_title_size }}px;--ev-body:{{ section.settings.body_size }}px;--ev-label:{{ section.settings.label_size }}px;--ev-width:{{ section.settings.max_width }}px;--ev-padding:{{ section.settings.padding }}px;--ev-gap:{{ section.settings.gap }}px;--ev-radius:{{ section.settings.radius }}px;--ev-row:{{ section.settings.row_padding }}px;">
+<div id="Evolve-{{ section.id }}" class="ev-tech" data-evolve-product style="--ev-bg:{{ section.settings.background }};--ev-panel:{{ section.settings.panel }};--ev-text:{{ section.settings.text_color }};--ev-muted:{{ section.settings.muted }};--ev-accent:{{ section.settings.accent }};--ev-line:{{ section.settings.line }};--ev-grid:{{ section.settings.grid_color }};--ev-button:{{ section.settings.button_bg }};--ev-button-text:{{ section.settings.button_text }};--ev-font:{{ body_font.family | escape }}, {{ body_font.fallback_families | escape }};--ev-title:{{ section.settings.title_size }}px;--ev-title-mobile:{{ section.settings.mobile_title_size }}px;--ev-body:{{ section.settings.body_size }}px;--ev-label:{{ section.settings.label_size }}px;--ev-width:{{ section.settings.max_width }}px;--ev-padding:{{ section.settings.padding }}px;--ev-gap:{{ section.settings.gap }}px;--ev-radius:{{ section.settings.radius }}px;--ev-row:{{ section.settings.row_padding }}px;--ev-table-after:{{ section.settings.detail_spacing }}px;--ev-download-after:{{ section.settings.detail_spacing }}px;">
   <div class="ev-tech__layout">
     <div class="ev-tech__media{% if section.settings.show_grid %} ev-tech__media--grid{% endif %}">
       <div class="ev-tech__media-top"><span>{{ section.settings.eyebrow | escape }}</span><span class="ev-tech__marker" aria-hidden="true">＋</span></div>
@@ -53,7 +53,7 @@
             {% for block in section.blocks %}
               {% if block.type == 'size_image' and block.settings.enabled and block.settings.image != blank %}
                 {% assign image = block.settings.image %}
-                <button type="button" class="ev-tech__thumb ev-tech__thumb--size" data-image="{{ image | image_url: width: 1600 }}" data-srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1600 }} 1600w" data-alt="{{ image.alt | default: block.settings.label | escape }}" aria-label="Show {{ block.settings.label | escape }} pack image" aria-pressed="{% if image == main_image %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}<span>{{ block.settings.label | escape }}</span></button>
+                <button type="button" class="ev-tech__thumb ev-tech__thumb--size" data-image="{{ image | image_url: width: 1600 }}" data-srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1600 }} 1600w" data-alt="{{ image.alt | default: block.settings.label | escape }}" aria-label="Show {{ block.settings.label | escape }} pack image" aria-pressed="{% if image == main_image %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '' }}</button>
               {% endif %}
             {% endfor %}
           {% else %}
@@ -301,7 +301,13 @@
     {
       "type": "color",
       "id": "line",
-      "label": "Borders and grid",
+      "label": "Borders and dividers",
+      "default": "#dce0d6"
+    },
+    {
+      "type": "color",
+      "id": "grid_color",
+      "label": "Grid line colour",
       "default": "#dce0d6"
     },
     {
@@ -415,6 +421,16 @@
       "step": 2,
       "default": 16,
       "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "detail_spacing",
+      "label": "Space below table and data sheet",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 32
     }
   ],
   "blocks": [
