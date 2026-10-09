@@ -24,9 +24,9 @@ Add, reorder, disable or remove up to **eight** specification rows independently
 
 - Main image override, product title override, rich-text description override, technical label and image caption. The image footer has a vector molecule mark at the bottom left, inspired by the supplied artwork, using the Accent colour setting.
 - Product title, description, thumbnails, hotspots, specification table and background grid visibility; separate variant selector, price and Add to cart toggles.
-- Section, image-panel background, grid lines, text, secondary text, accent, border, button background and button text colours. Grid line colour is independent of border/divider colour.
+- Section, grid background, grid lines, text, secondary text, accent, border, button background and button text colours. Grid line colour is independent of border/divider colour.
 - Montserrat font loaded through Shopify’s font library (Regular 400 body, Semibold 600 subheadings and labels, Bold 700 headings); desktop/mobile title sizes; body/label sizes; width, spacing, panel radius and row padding, plus a Space below table and data sheet slider (32px by default, applied below each).
-- Hotspot title, detail text, visibility and horizontal/vertical placement. Detail text can connect to compatible dynamic sources.
+- Up to **12 Image hotspot** blocks, each with its own title, detail text, visibility and horizontal/vertical placement sliders. Add more via **Add block → Image hotspot**; edit its Horizontal position and Vertical position to move the circle. Detail text can connect to compatible dynamic sources.
 
 Hotspot coordinates relate to the primary image. They disappear when another gallery image is selected and return with the primary image. Use an image override if you need stable placement across products. The same template shares hotspot positions across products; use separate product templates where images differ substantially. Video and 3D media remain in Impulse's main gallery.
 
@@ -63,3 +63,5 @@ When the variant selector, price or Add to cart is enabled, Shopify's product va
 **Show price**, **Show Add to cart** and **Show variant selector** are independent settings, all off by default on new sections. A catalogue pack-size dropdown still appears when you have configured size images. For a catalogue, leave price and Add to cart off; the image selector, specification table and Safety Data Sheet remain available. No purchase form is rendered when Add to cart is off. Turning Add to cart on also supplies the variant selector required to choose a valid purchase variant. You can keep price hidden while enabling cart, or show price with cart disabled.
 
 These toggles affect this custom section only. To keep the whole product page in catalogue mode, hide price and purchase controls in Impulse's other product sections as well. Theme visibility settings do not disable the store's checkout or other sales channels.
+
+The **Grid background colour** control sets the colour behind the grid lines. **Grid line colour** sets the lines separately. Hotspot plus signs and size-dropdown arrows are inline SVGs so they do not depend on font glyphs or empty-element styling in Impulse. The Technical data heading has no circle or arrow accent. When updating, replace both the section Liquid and CSS together to keep the icon markup and styles in sync.
