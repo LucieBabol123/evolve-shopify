@@ -1,0 +1,5 @@
+# Merge this entry into your local Codex config.toml; preserve other settings.
+# Dev MCP provides development documentation and validation, not store authentication.
+[mcp_servers.shopify-dev-mcp]
+command = "npx"
+args = ["-y", "@shopify/dev-mcp@latest"]
