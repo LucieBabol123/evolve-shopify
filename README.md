@@ -64,6 +64,25 @@ When the variant selector, price or Add to cart is enabled, Shopify's product va
 
 These toggles affect this custom section only. To keep the whole product page in catalogue mode, hide price and purchase controls in Impulse's other product sections as well. Theme visibility settings do not disable the store's checkout or other sales channels.
 
-The **Grid background colour** control sets the colour behind the grid lines. **Grid line colour** sets the lines separately. Hotspot plus signs and size-dropdown arrows are inline SVGs so they do not depend on font glyphs or empty-element styling in Impulse. The Technical data heading has no circle or arrow accent. When updating, replace both the section Liquid and CSS together to keep the icon markup and styles in sync.
+The **Grid background colour** control sets the colour behind the grid lines. **Grid line colour** sets the lines separately. Hotspot plus signs are inline SVGs so they do not depend on font glyphs or empty-element styling in Impulse. The custom size-dropdown arrow has been removed. The Technical data heading has no circle or arrow accent. When updating, replace both the section Liquid and CSS together to keep the icon markup and styles in sync.
 
 Feature information opens on mouse hover. Move into the tooltip to read it; moving away closes an unpinned tooltip after a short delay. Click to pin it open, and click again or press Escape to close. Touch and keyboard activation retain normal click/Enter/Space behavior. Opening one feature closes another.
+
+## Move information in Shopify's editor
+
+All information-column groups can be arranged using **Layout** blocks: Technical label, Product title, Description, Size selector, Price, Add to cart, Technical table, and Safety Data Sheet. These blocks set position; the existing section settings still control content, styling and visibility. Each group can be added once. Specification row blocks continue to reorder the rows *inside* the technical table.
+
+For an existing section, replace the Liquid and CSS files, then open **Customize → product template → Evolve technical product**. Use **Add block** to add each of the eight **Layout:** blocks once. Drag those Layout blocks into your desired order, for example:
+
+1. Layout: Technical label
+2. Layout: Product title
+3. Layout: Description
+4. Layout: Size selector
+5. Layout: Price
+6. Layout: Add to cart
+7. Layout: Technical table
+8. Layout: Safety Data Sheet
+
+Your existing metafield row connections, pack images and hotspots remain intact. You do not need to delete/re-add the whole section. Groups without a Layout block still render automatically after the explicitly positioned groups, so adding all eight is recommended before rearranging. Deleting a Layout block restores that group's fallback placement; use the existing section visibility controls to hide it.
+
+Newly added sections include all eight Layout blocks automatically, with price and cart placed above technical details. Price and cart remain hidden until their visibility settings are enabled. The size selector is associated with the purchase form even when they are in different positions.

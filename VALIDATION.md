@@ -3,9 +3,10 @@
 Passed locally:
 - Shopify Theme Check 3.30.1: zero offenses for the section, checked in a temporary partial-theme harness with an empty locales directory.
 - JavaScript syntax check.
-- Footer mark and thin dropdown chevron retain their explicit bounds under a simulated global theme SVG sizing rule.
+- All eight content groups reorder in DOM order without duplicates. Price and cart render above the table; a variant selector placed outside and after the cart form still contributes the selected variant ID to native FormData, and price/sold-out updates remain functional. Existing sections without Layout blocks retain fallback rendering.
+- Footer mark retains its explicit bounds under a simulated global theme SVG sizing rule. Dropdown chevron markup is absent.
 - Molecule-and-dot mark is 24×18px at the footer right edge with original desktop/mobile padding. Mouse hover opens features, pointer movement into the tooltip keeps it open, leaving closes it, click pins it, and Escape/keyboard/touch controls remain functional.
-- Two independently positioned hotspots render at their configured coordinates; disabled hotspots hide, and opening a second closes the first. The Technical data header has no accent icon, and both size dropdowns have visible non-intercepting SVG chevrons.
+- Two independently positioned hotspots render at their configured coordinates; disabled hotspots hide, and opening a second closes the first. The Technical data header has no accent icon, and both custom dropdown chevrons are removed.
 - Vertical thumbnail rail is left of the main image on desktop/mobile without page overflow. Catalogue dropdown switches all six pack images and thumbnail clicks update its selection.
 - Variant selector switches to its matching pack image; pack thumbnail selects the matching variant; an unmapped pack disables purchase. Matching ignores whitespace in size values.
 - Hotspot plus uses a visible inline SVG path; browser geometry confirms the icon is centred within 0.1px on desktop/mobile, both closed and rotated open.
