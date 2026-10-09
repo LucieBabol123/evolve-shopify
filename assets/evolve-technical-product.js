@@ -85,8 +85,34 @@
       });
       if (variantSelect) updateVariant();
       root.querySelectorAll('.ev-tech__hotspot').forEach((hotspot) => {
+        let closeTimer;
+        let pinned = false;
+        let hovered = false;
+        const clearCloseTimer = () => window.clearTimeout(closeTimer);
+        hotspot.addEventListener('pointerenter', (event) => {
+          if (event.pointerType !== 'mouse' || !window.matchMedia('(hover: hover)').matches) return;
+          hovered = true;
+          clearCloseTimer();
+          hotspot.open = true;
+        });
+        hotspot.addEventListener('pointerleave', (event) => {
+          if (event.pointerType !== 'mouse') return;
+          hovered = false;
+          clearCloseTimer();
+          // Allow crossing the small gap from the circle to its tooltip.
+          closeTimer = window.setTimeout(() => {
+            if (!pinned && !hovered) hotspot.open = false;
+          }, 180);
+        });
+        hotspot.querySelector('summary').addEventListener('click', (event) => {
+          if (!hovered || event.detail === 0) return;
+          // Clicking a hover-opened feature pins it; a second click closes it.
+          event.preventDefault();
+          pinned = !pinned;
+          hotspot.open = pinned;
+        });
         hotspot.addEventListener('toggle', () => {
-          if (!hotspot.open) return;
+          if (!hotspot.open) { pinned = false; clearCloseTimer(); return; }
           root.querySelectorAll('.ev-tech__hotspot').forEach((other) => { if (other !== hotspot) other.open = false; });
         });
       });

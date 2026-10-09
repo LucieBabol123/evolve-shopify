@@ -63,7 +63,7 @@
           {% endif %}
         </div>
       </div>
-      {% if section.settings.image_caption != blank %}<div class="ev-tech__caption"><svg class="ev-tech__molecule" viewBox="0 0 92 96" aria-hidden="true" focusable="false"><path d="M44 24 A20 20 0 1 0 24 44 C37 42 50 55 48 72 A20 20 0 1 0 68 52 C53 54 42 39 44 24 Z" fill="currentColor"/></svg>{{ section.settings.image_caption | escape }}</div>{% endif %}
+      {% if section.settings.image_caption != blank %}<div class="ev-tech__caption">{{ section.settings.image_caption | escape }}<svg class="ev-tech__molecule" viewBox="0 0 92 96" aria-hidden="true" focusable="false"><path d="M44 24 A20 20 0 1 0 24 44 C37 42 50 55 48 72 A20 20 0 1 0 68 52 C53 54 42 39 44 24 Z" fill="currentColor"/></svg></div>{% endif %}
     </div>
     <div class="ev-tech__content">
       {% if section.settings.eyebrow != blank %}<div class="ev-tech__eyebrow">{{ section.settings.eyebrow | escape }}</div>{% endif %}
