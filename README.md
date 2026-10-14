@@ -78,11 +78,13 @@ For an existing section, replace the Liquid and CSS files, then open **Customize
 2. Layout: Product title
 3. Layout: Description
 4. Layout: Size selector
-5. Layout: Price
-6. Layout: Add to cart
-7. Layout: Technical table
-8. Layout: Safety Data Sheet
+5. Layout: Technical table
+6. Layout: Safety Data Sheet
+7. Layout: Price
+8. Layout: Add to cart
 
 Your existing metafield row connections, pack images and hotspots remain intact. You do not need to delete/re-add the whole section. Groups without a Layout block still render automatically after the explicitly positioned groups, so adding all eight is recommended before rearranging. Deleting a Layout block restores that group's fallback placement; use the existing section visibility controls to hide it.
 
-Newly added sections include all eight Layout blocks automatically, with price and cart placed above technical details. Price and cart remain hidden until their visibility settings are enabled. The size selector is associated with the purchase form even when they are in different positions.
+Newly added sections include all eight Layout blocks automatically, with the size selector immediately below the description and the technical table immediately below the selector. Price, Add to cart and Safety Data Sheet remain independently movable. Price and cart remain hidden until their visibility settings are enabled. The size selector is associated with the purchase form even when they are in different positions.
+
+Changing the preset does not rearrange Layout blocks already saved in your Shopify product template. For an existing installation, drag **Layout: Size selector** below **Layout: Description**, then **Layout: Technical table** below the selector. If those blocks are missing, add all eight Layout blocks once before arranging them; preserve your existing specification rows and image blocks.
