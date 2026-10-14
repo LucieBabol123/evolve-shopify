@@ -70,21 +70,41 @@ Feature information opens on mouse hover. Move into the tooltip to read it; movi
 
 ## Move information in Shopify's editor
 
-All information-column groups can be arranged using **Layout** blocks: Technical label, Product title, Description, Size selector, Price, Add to cart, Technical table, and Safety Data Sheet. These blocks set position; the existing section settings still control content, styling and visibility. Each group can be added once. Specification row blocks continue to reorder the rows *inside* the technical table.
+All information-column groups can be arranged using **Layout** blocks: Technical label, Product title, Description, Size selector, Price, Add to cart, Technical table, and Safety Data Sheet. These blocks set position; the existing section settings still control content, styling and visibility. Each group can be added once. Packaging size selector, Price and Add to cart are named directly in the block list; the other positioning blocks retain the Layout: prefix. Specification row blocks continue to reorder the rows *inside* the technical table.
 
 For an existing section, replace the Liquid and CSS files, then open **Customize → product template → Evolve technical product**. Use **Add block** to add each of the eight **Layout:** blocks once. Drag those Layout blocks into your desired order, for example:
 
 1. Layout: Technical label
 2. Layout: Product title
 3. Layout: Description
-4. Layout: Size selector
+4. Packaging size selector
 5. Layout: Technical table
 6. Layout: Safety Data Sheet
-7. Layout: Price
-8. Layout: Add to cart
+7. Price
+8. Add to cart
 
 Your existing metafield row connections, pack images and hotspots remain intact. You do not need to delete/re-add the whole section. Groups without a Layout block still render automatically after the explicitly positioned groups, so adding all eight is recommended before rearranging. Deleting a Layout block restores that group's fallback placement; use the existing section visibility controls to hide it.
 
 Newly added sections include all eight Layout blocks automatically, with the size selector immediately below the description and the technical table immediately below the selector. Price, Add to cart and Safety Data Sheet remain independently movable. Price and cart remain hidden until their visibility settings are enabled. The size selector is associated with the purchase form even when they are in different positions.
 
-Changing the preset does not rearrange Layout blocks already saved in your Shopify product template. For an existing installation, drag **Layout: Size selector** below **Layout: Description**, then **Layout: Technical table** below the selector. If those blocks are missing, add all eight Layout blocks once before arranging them; preserve your existing specification rows and image blocks.
+Changing the preset does not rearrange Layout blocks already saved in your Shopify product template. For an existing installation, drag **Packaging size selector** below **Layout: Description**, then **Layout: Technical table** below the selector. If those blocks are missing, add all eight Layout blocks once before arranging them; preserve your existing specification rows and image blocks.
+
+## Packaging, price and cart spacing
+
+Open **Packaging size selector**, **Price**, or **Add to cart** in the editor block list to set **Top padding** and **Bottom padding** (0–100px). Drag each block like a Specification row or Pack size image. Price and cart also have a **Visibility** choice: Use section setting, Show or Hide. This preserves your existing section toggles by default and allows each block to be controlled directly.
+
+The whole image panel is now square, including its grid header, thumbnail rail and footer. The product image uses contain sizing so it stays uncropped. The panel is capped by viewport height with space reserved for page padding and a typical header; the thumbnails scroll within the rail. An unusually tall theme header, announcement bar or other content above the section can still require scrolling. On mobile the information column remains below the image.
+
+## Optional Evolve product template with blocks already added
+
+The package now includes **templates/product.evolve.json**, which pre-adds all eight information blocks plus the specification, hotspot and pack-image blocks. It is a new product template containing this Evolve section only; Impulse's existing main-product section and app blocks are not included. It does not replace your default product template.
+
+To try it on a duplicate theme:
+
+1. Update the section Liquid and CSS files first.
+2. In Edit code, create a new **JSON product template** named **evolve**. Replace that new file's contents with `templates/product.evolve.json` from this package. If that template name already exists, preserve it and use a different new name instead.
+3. Open the theme editor and select **Products → evolve**, then choose a product to preview.
+4. In Evolve technical product, the block list already includes **Packaging size selector**, **Price** and **Add to cart**. Drag them to the preferred positions and set their padding/visibility.
+5. Connect the metafield rows and pack images for this new template. Your original template retains its existing connections and settings.
+
+For an existing configured section, you can instead update its Liquid/CSS and add the missing information blocks manually; you do not need to switch templates or recreate its metafield connections. Check the duplicate theme before publishing or assigning products to the new template.

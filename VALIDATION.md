@@ -20,3 +20,12 @@ Passed locally:
 - Headless system Chromium at desktop (1440px) and mobile (375px): hotspot open/close and Escape focus handling; gallery image switching and hotspot visibility; available/sold-out variant button states and price updates; cart form target; mobile page overflow and tooltip bounds; initialization on Shopify section reload.
 
 Limits: LiquidJS used adapters for Shopify image/font filters and the product form tag. The standalone preview uses illustrative packaging, sample specifications and prices. It is not live Shopify rendering. No request was sent to a Shopify cart. Impulse 9.2.0 source and store access are unavailable, so final theme rendering, actual metafield bindings, installed apps and checkout/cart behavior must be checked in a duplicate theme before publication.
+
+
+Latest square-panel and editor-block validation:
+- Shopify Theme Check: zero offenses, including the new JSON product template.
+- Packaging size selector, Price and Add to cart are defined as single-use blocks and pre-added in `product.evolve.json`.
+- Independent top/bottom padding renders at selected values; price/cart block Show/Hide overrides work while preserving inherited section settings.
+- Reordering selector, price and cart above the table preserves variant ID submission and sold-out states.
+- Whole image panel is square and fits the available local viewport at 1440×900, 1366×768, 375×812 and 390×667 without horizontal page overflow. Actual store header height was not available to test.
+- Gallery switching and hover popups still work. Previews regenerated from the updated section and template with illustrative product data.

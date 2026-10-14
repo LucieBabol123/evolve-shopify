@@ -11,6 +11,23 @@
 {{ 'evolve-technical-product.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'evolve-technical-product.js' | asset_url }}" defer="defer"></script>
 {%- liquid
+  assign show_price = section.settings.show_price
+  assign show_cart = section.settings.show_cart
+  for block in section.blocks
+    if block.type == 'content_price'
+      if block.settings.visibility == 'show'
+        assign show_price = true
+      elsif block.settings.visibility == 'hide'
+        assign show_price = false
+      endif
+    elsif block.type == 'content_cart'
+      if block.settings.visibility == 'show'
+        assign show_cart = true
+      elsif block.settings.visibility == 'hide'
+        assign show_cart = false
+      endif
+    endif
+  endfor
   assign current_variant = product.selected_or_first_available_variant
   assign first_size_image = nil
   assign configured_size_count = 0
@@ -77,8 +94,8 @@
 {% if section.settings.show_description %}<div class="ev-tech__description">{% if section.settings.intro != blank %}{{ section.settings.intro }}{% else %}{{ product.description }}{% endif %}</div>{% endif %}
 {% endcapture %}
 {% capture content_selector %}
-{% if section.settings.show_purchase or section.settings.show_price or section.settings.show_cart %}
-  {% if section.settings.show_purchase or section.settings.show_cart or configured_size_count > 0 %}
+{% if section.settings.show_purchase or show_price or show_cart %}
+  {% if section.settings.show_purchase or show_cart or configured_size_count > 0 %}
     <div class="ev-tech__pack-picker">
       <label for="EvolveVariant-{{ section.id }}">Select option</label>
       <div class="ev-tech__select"><select id="EvolveVariant-{{ section.id }}" name="id" form="{{ form_id }}" data-ev-variant>
@@ -137,10 +154,10 @@
 
 {% endcapture %}
 {% capture content_price %}
-{% if section.settings.show_price %}<p class="ev-tech__price" data-ev-price aria-live="polite">{{ current_variant.price | money }}</p>{% endif %}
+{% if show_price %}<p class="ev-tech__price" data-ev-price aria-live="polite">{{ current_variant.price | money }}</p>{% endif %}
 {% endcapture %}
 {% capture content_cart %}
-{% if section.settings.show_cart %}
+{% if show_cart %}
   {% form 'product', product, id: form_id, class: 'ev-tech__form' %}
     {{ form.errors | default_errors }}
     <input type="hidden" name="quantity" value="1">
@@ -164,7 +181,7 @@
   {% if block.type contains 'content_' %}
     {% assign rendered_groups = rendered_groups | append: block.type | append: '|' %}
     {% assign visible_group = group_content | strip %}
-    {% if visible_group != blank %}<div class="ev-tech__group" data-ev-content="{{ block.type }}" {{ block.shopify_attributes }}>{{ group_content }}</div>{% endif %}
+    {% if visible_group != blank %}<div class="ev-tech__group" data-ev-content="{{ block.type }}"{% if block.type == 'content_selector' or block.type == 'content_price' or block.type == 'content_cart' %} style="--ev-group-before:{{ block.settings.padding_top | default: 0 }}px;--ev-group-after:{{ block.settings.padding_bottom | default: 0 }}px;"{% endif %} {{ block.shopify_attributes }}>{{ group_content }}</div>{% endif %}
   {% endif %}
 {% endfor %}
 {% assign default_groups = 'content_label,content_title,content_description,content_selector,content_table,content_datasheet,content_price,content_cart' | split: ',' %}
@@ -635,12 +652,32 @@
     },
     {
       "type": "content_selector",
-      "name": "Layout: Size selector",
+      "name": "Packaging size selector",
       "limit": 1,
       "settings": [
         {
           "type": "paragraph",
           "content": "Drag this block to move size selector in the information column. Its content and visibility are controlled by the section settings."
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Top padding",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Bottom padding",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "default": 28
         }
       ]
     },
@@ -668,23 +705,103 @@
     },
     {
       "type": "content_price",
-      "name": "Layout: Price",
+      "name": "Price",
       "limit": 1,
       "settings": [
         {
           "type": "paragraph",
           "content": "Drag this block to move price in the information column. Its content and visibility are controlled by the section settings."
+        },
+        {
+          "type": "select",
+          "id": "visibility",
+          "label": "Visibility",
+          "default": "section",
+          "options": [
+            {
+              "value": "section",
+              "label": "Use section setting"
+            },
+            {
+              "value": "show",
+              "label": "Show"
+            },
+            {
+              "value": "hide",
+              "label": "Hide"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Top padding",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Bottom padding",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "default": 16
         }
       ]
     },
     {
       "type": "content_cart",
-      "name": "Layout: Add to cart",
+      "name": "Add to cart",
       "limit": 1,
       "settings": [
         {
           "type": "paragraph",
           "content": "Drag this block to move add to cart in the information column. Its content and visibility are controlled by the section settings."
+        },
+        {
+          "type": "select",
+          "id": "visibility",
+          "label": "Visibility",
+          "default": "section",
+          "options": [
+            {
+              "value": "section",
+              "label": "Use section setting"
+            },
+            {
+              "value": "show",
+              "label": "Show"
+            },
+            {
+              "value": "hide",
+              "label": "Hide"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Top padding",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Bottom padding",
+          "min": 0,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "default": 0
         }
       ]
     }

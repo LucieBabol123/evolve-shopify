@@ -1,0 +1,146 @@
+{
+  "sections": {
+    "evolve": {
+      "type": "evolve-technical-product",
+      "settings": {
+        "show_price": false,
+        "show_cart": false,
+        "show_purchase": false
+      },
+      "blocks": {
+        "evolve_1": {
+          "type": "content_label"
+        },
+        "evolve_2": {
+          "type": "content_title"
+        },
+        "evolve_3": {
+          "type": "content_description"
+        },
+        "evolve_4": {
+          "type": "content_selector"
+        },
+        "evolve_5": {
+          "type": "content_table"
+        },
+        "evolve_6": {
+          "type": "content_datasheet"
+        },
+        "evolve_7": {
+          "type": "content_price"
+        },
+        "evolve_8": {
+          "type": "content_cart"
+        },
+        "evolve_9": {
+          "type": "spec",
+          "settings": {
+            "label": "Viscosity"
+          }
+        },
+        "evolve_10": {
+          "type": "spec",
+          "settings": {
+            "label": "Standards"
+          }
+        },
+        "evolve_11": {
+          "type": "spec",
+          "settings": {
+            "label": "Approval"
+          }
+        },
+        "evolve_12": {
+          "type": "spec",
+          "settings": {
+            "label": "Specifications"
+          }
+        },
+        "evolve_13": {
+          "type": "spec",
+          "settings": {
+            "label": "Performances"
+          }
+        },
+        "evolve_14": {
+          "type": "spec",
+          "settings": {
+            "label": "Application"
+          }
+        },
+        "evolve_15": {
+          "type": "spec",
+          "settings": {
+            "label": "Quality"
+          }
+        },
+        "evolve_16": {
+          "type": "hotspot"
+        },
+        "evolve_17": {
+          "type": "size_image",
+          "settings": {
+            "label": "1L"
+          }
+        },
+        "evolve_18": {
+          "type": "size_image",
+          "settings": {
+            "label": "4L"
+          }
+        },
+        "evolve_19": {
+          "type": "size_image",
+          "settings": {
+            "label": "5L"
+          }
+        },
+        "evolve_20": {
+          "type": "size_image",
+          "settings": {
+            "label": "20L"
+          }
+        },
+        "evolve_21": {
+          "type": "size_image",
+          "settings": {
+            "label": "60L"
+          }
+        },
+        "evolve_22": {
+          "type": "size_image",
+          "settings": {
+            "label": "199L"
+          }
+        }
+      },
+      "block_order": [
+        "evolve_1",
+        "evolve_2",
+        "evolve_3",
+        "evolve_4",
+        "evolve_5",
+        "evolve_6",
+        "evolve_7",
+        "evolve_8",
+        "evolve_9",
+        "evolve_10",
+        "evolve_11",
+        "evolve_12",
+        "evolve_13",
+        "evolve_14",
+        "evolve_15",
+        "evolve_16",
+        "evolve_17",
+        "evolve_18",
+        "evolve_19",
+        "evolve_20",
+        "evolve_21",
+        "evolve_22"
+      ]
+    }
+  },
+  "order": [
+    "evolve"
+  ]
+}
